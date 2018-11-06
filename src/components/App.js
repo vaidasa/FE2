@@ -63,11 +63,13 @@ class App extends React.Component {
 }
 
 export default connect(
+  // function to get data from redux store to this components props
   (state) => {
     return {
       movieList: state.movies.list,
     };
   },
+  // function to pass action callers to this components props
   (dispatch) => {
     return {
       // onSetMovies - simplest way to pass data to store
