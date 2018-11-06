@@ -1,28 +1,20 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import Card from './Card';
-import { endpoints } from '../../config';
 import Genres from './Genres';
+import { getMovies } from '../thunks';
 import { setMovies } from '../actions';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       hearted: [],
     };
 
-    this.requestMovies();
+    props.onGetMovies();
   }
-
-  requestMovies = () => {
-    axios
-      .get(endpoints.mostPopularMovies())
-      .then((res) => this.props.onSetMovies(res.data.results))
-      .catch((error) => console.log(error));
-  };
 
   setMovieList = (movieList) => {
     this.setState({
@@ -78,7 +70,9 @@ export default connect(
   },
   (dispatch) => {
     return {
+      // onSetMovies - simplest way to pass data to store
       onSetMovies: (movies) => dispatch(setMovies(movies)),
+      onGetMovies: () => dispatch(getMovies()),
     };
   },
 )(App);
