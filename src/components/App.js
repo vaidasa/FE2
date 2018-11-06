@@ -1,15 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Card from './Card';
 import { endpoints } from '../../config';
 import Genres from './Genres';
+import { setMovies } from '../actions';
 
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      movieList: [],
       hearted: [],
     };
 
@@ -19,7 +20,7 @@ class App extends React.Component {
   requestMovies = () => {
     axios
       .get(endpoints.mostPopularMovies())
-      .then((res) => this.setMovieList(res.data.results))
+      .then((res) => this.props.onSetMovies(res.data.results))
       .catch((error) => console.log(error));
   };
 
@@ -46,7 +47,8 @@ class App extends React.Component {
   };
 
   render() {
-    const { movieList, hearted } = this.state;
+    const { movieList } = this.props;
+    const { hearted } = this.state;
 
     return (
       <React.Fragment>
@@ -68,4 +70,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(
+  (state) => {
+    return {
+      movieList: state.movies.list,
+    };
+  },
+  (dispatch) => {
+    return {
+      onSetMovies: (movies) => dispatch(setMovies(movies)),
+    };
+  },
+)(App);
