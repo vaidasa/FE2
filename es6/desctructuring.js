@@ -1,6 +1,6 @@
-const amzius = [13, 15, 22];
+export const amzius = [13, 15, 22];
 
-const namas = {
+export const namas = {
   ismatavimai: {
     aukstis: 13,
     plotis: 22,
@@ -13,6 +13,12 @@ const namas = {
     'Tomas',
   ],
 };
+
+const foo = 3;
+
+export default foo;
+
+namas.ismatavimai.ilgis
 
 const { spalva, gyventojai } = namas;
 const { ismatavimai: { aukstis, plotis } } = namas;

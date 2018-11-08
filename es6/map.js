@@ -19,6 +19,9 @@ const masinos = [
   },
 ];
 
-const map = masinos.map((masina) => masina.marke);
-const filter = masinos.filter((masina) => masina.kaina < 2000);
-const reduce = masinos.map((masina) => masina.kaina).reduce((kainuSuma, kaina) => kainuSuma + kaina);
+const masinuMarkes = masinos.map((masina) => masina.marke);
+
+
+// const map = masinos.map((masina) => masina.marke);
+// const filter = masinos.filter((masina) => masina.kaina < 2000);
+// const reduce = masinos.map((masina) => masina.kaina).reduce((kainuSuma, kaina) => kainuSuma + kaina);
