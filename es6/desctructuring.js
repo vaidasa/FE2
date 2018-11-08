@@ -19,4 +19,3 @@ export default namas;
 const { spalva, gyventojai } = namas;
 const { ismatavimai: { aukstis, plotis } } = namas;
 const [ pirmasGyventojas, antrasGyventojas ] = gyventojai;
-const { ismatavimai, antrasGyventojas ] = gyventojai;
