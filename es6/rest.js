@@ -1,4 +1,16 @@
-import { namas } from './desctructuring';
+const namas = {
+  ismatavimai: {
+    aukstis: 13,
+    plotis: 22,
+    ilgis: 5,
+  },
+  spalva: 'raudona',
+  gyventojai: [
+    'Liudas',
+    'Ausra',
+    'Tomas',
+  ],
+};
 
 const { ismatavimai, ismatavimaiSkladuko } = namas;
 
@@ -9,7 +21,7 @@ const naujasObjektas = {
 };
 
 const funkcija = (...rest) => {
-  console.log(rest); // rest = [ 1, 2, 3, 4 ]
+  console.log(rest);
 };
 
 funkcija(1, 2, 3, 4);

@@ -1,4 +1,4 @@
-export const amzius = [13, 15, 22];
+const amzius = [13, 15, 22];
 
 const namas = {
   ismatavimai: {
@@ -13,8 +13,6 @@ const namas = {
     'Tomas',
   ],
 };
-
-export default namas;
 
 const { spalva, gyventojai } = namas;
 const { ismatavimai: { aukstis, plotis } } = namas;
