@@ -18,11 +18,19 @@ export default class Card extends React.Component {
     });
   };
 
+  toggleHearth = () => {
+
+    this.props.likedList.includes(this.props.movie.id)
+       ? this.props.onUnliked(this.props.movie.id)
+       : this.props.onLiked(this.props.movie.id);
+
+    this.setState({});
+
+  };
+
   render() {
+
     const {
-      isHearted,
-      onAddHeart,
-      onRemoveHeart,
       movie: {
         backdrop_path,
         original_title,
@@ -30,9 +38,12 @@ export default class Card extends React.Component {
         release_date,
         vote_average,
         vote_count,
+        id,
       },
+      likedList,
     } = this.props;
     const { opened } = this.state;
+
 
     return (
       <div className="card">
@@ -45,8 +56,12 @@ export default class Card extends React.Component {
           {original_title}
         </div>
 
-        <div className="card__like" onClick={isHearted ? onRemoveHeart : onAddHeart}>
-          <i className={`fa fa-heart${isHearted ? '' : '-o'}`} />
+        <div className="card__like">
+          {likedList.includes(id)
+            ? <i className="fa fa-heart" onClick={this.toggleHearth} />
+            : <i className="fa fa-heart-o" onClick={this.toggleHearth} />
+          }
+
         </div>
 
         <div className="card__subtitle">
