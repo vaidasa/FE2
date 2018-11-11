@@ -1,43 +1,81 @@
 import React from 'react';
-import Card from './Card';
 import axios from 'axios';
+import Card from './Card';
+import Genre from './Genre';
 import { endpoints } from '../../config';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
       movieList: [],
-    }
+      genreList: [],
+      likedList: [],
+    };
+
+    this.requestMovies();
+    this.requestGenres();
+
   }
 
-  componentDidMount() {
-    this.requestPopularMovies();
-  }
-
-  requestPopularMovies = () => {
+  requestMovies = () => {
     axios
       .get(endpoints.mostPopularMovies())
-      .then((response) => {
-        this.setState({
-          movieList: response.data.results,
-        });
-      })
-      .catch((error) => console.log(error.response));
+      .then((res) => this.setMovieList(res.data.results))
+      .catch((error) => console.log(error));
+  };
+
+  setMovieList = (movieList) => {
+    this.setState({
+      movieList,
+    })
+  };
+
+  requestGenres = () => {
+    axios
+      .get(endpoints.genres())
+      .then((res) => this.setGenreList(res.data.genres))
+      .catch((error) => console.log(error));
+  };
+
+  setGenreList = (genreList) => {
+     this.setState({
+       genreList,
+     })
+  };
+
+  onReceivedNewList = (movieList) => {
+    this.setState({
+      movieList,
+    });
+  };
+
+  onLiked = (id) => {
+    this.state.likedList.push(id);
+  };
+
+  onUnliked = (id) => {
+    let {likedList} = this.state;
+    likedList = likedList.filter(movieId => movieId !== id);
+    this.setState({
+      likedList,
+    });
   };
 
   render() {
-    const { movieList } = this.state;
+    const { movieList, genreList, likedList } = this.state;
 
     return (
-      <React.Fragment>
-        {movieList.map((movie) => (
-          <Card key={movie.id} data={movie} />
-        ))}
-      </React.Fragment>
+      <div>
+        <div className="genres">
+          {genreList.map((genre) => <Genre genre={genre} onReceivedNewList={this.onReceivedNewList}  />)}
+        </div>
+        <div className="cards">
+          {movieList.map((movie) => <Card movie={movie} likedList={likedList} onLiked={this.onLiked} onUnliked={this.onUnliked} />)}
+        </div>
+
+      </div>
     );
   }
 }
-
-export default App;
