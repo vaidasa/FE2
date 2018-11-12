@@ -9,38 +9,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      hearted: [],
-    };
-
     props.onGetMovies();
 
   }
 
 
-  addHeart = (id) => {
-    const { hearted } = this.state;
-
-    this.setState({
-      hearted: [ ...hearted, id ],
-    })
-  };
-
-  removeHeart = (id) => {
-    const { hearted } = this.state;
-
-    this.setState({
-      hearted: hearted.filter((currentId) => currentId !== id),
-    })
-  };
-
   render() {
     const { movieList } = this.props;
     const { hearted } = this.props;
 
+    console.log("On Api.js render1 " + this.props);
     console.log("On Api.js render " + movieList);
-
+    console.log( "on App.js hearted " + hearted);
     return (
+
       <React.Fragment>
         <Genres />
 
@@ -48,7 +30,6 @@ class App extends React.Component {
           {movieList.map((movie) => (
             <Card
               key={movie.id}
-              isHearted={hearted.includes(movie.id)}
               onAddHeart={() => this.addHeart(movie.id)}
               onRemoveHeart={() => this.removeHeart(movie.id)}
               movie={movie}

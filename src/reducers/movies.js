@@ -1,6 +1,6 @@
 const initialState = {
   list: [],
-  // hearted: []
+  hearted: []
 };
 
 
@@ -12,6 +12,9 @@ export default (state = initialState, action) => {
         list: action.payload
       };
     case 'ADD_HEART':
+
+      console.log("on reducers movies.js ADD_HEART");
+
       return {
         ...state,
         hearted: [ ...state.hearted, action.payload ]

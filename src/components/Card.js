@@ -1,6 +1,7 @@
 import React from 'react';
 import { getImageUrl } from '../../config';
 import { connect } from 'react-redux';
+import { heartMovie, unheartMovie } from "../thunks";
 
 class Card extends React.Component {
   constructor() {
@@ -76,8 +77,8 @@ export default connect(
   ({ movies: { hearted } }, { movie: { id } }) => ({
     isHearted: hearted.includes(id)
   }),
-  (dispatch, { movie: { id, title } }) => ({
-    onAddHeart: () => dispatch(heartMovie(id, title)),
-    onRemoveHeart: () => dispatch(unheartMovie(id, title))
+  (dispatch, { movie: { id} }) => ({
+    onAddHeart: () => dispatch(heartMovie(id)),
+    onRemoveHeart: () => dispatch(unheartMovie(id))
   })
 )(Card);

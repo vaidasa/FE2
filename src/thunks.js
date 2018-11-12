@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setMovies, setGenres } from './actions';
+import { setMovies, setGenres, addHeart, removeHeart } from './actions';
 import { endpoints } from '../config';
 
 
@@ -28,4 +28,13 @@ export const getMoviesByGenre = (id) => dispatch => {
       dispatch(setMovies(results));
     })
     .catch(error => console.log(error));
+};
+
+
+export const heartMovie = (id) => dispatch => {
+  dispatch(addHeart(id));
+};
+
+export const unheartMovie = (id) => dispatch => {
+  dispatch(removeHeart(id));
 };

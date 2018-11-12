@@ -6,7 +6,17 @@ export const setMovies = (movies) => {
   };
 };
 
-export const setGenres = genres => ({
+export const setGenres = (genres) => ({
   type: 'SET_GENRES',
   payload: genres
+});
+
+export const addHeart = (id) => ({
+  type: 'ADD_HEART',
+  payload: id
+});
+
+export const removeHeart = (id) => ({
+  type: 'REMOVE_HEART',
+  payload: id
 });
