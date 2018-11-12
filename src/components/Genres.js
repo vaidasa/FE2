@@ -37,8 +37,6 @@ class Genres extends React.Component {
   render() {
     const { genres, onGetMoviesByGenre } = this.props;
 
-    console.log('on render genres.js' + this.props.genres);
-
     return (
       <div className="genres">
         {genres.map(({ id, name }) => (
@@ -51,10 +49,13 @@ class Genres extends React.Component {
   }
 }
 
+
 export default connect(
-  ({ genres }) => ({
-    genres
-  }),
+  (state) => {
+    return {
+      genres: state.genres,
+    }
+  },
   dispatch => ({
     onGetGenres: () => dispatch(getGenres()),
     onGetMoviesByGenre: (id, name) => dispatch(getMoviesByGenre(id, name))

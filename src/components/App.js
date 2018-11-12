@@ -16,10 +16,6 @@ class App extends React.Component {
     const { movieList } = this.props;
     const { hearted } = this.props;
 
-
-    console.log("on App.js this.propsas: " + this.props.movieList);
-    //console.log("on App.js hearted: " + movies.hearted);
-
     return (
 
       <React.Fragment>

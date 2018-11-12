@@ -75,13 +75,26 @@ class Card extends React.Component {
 
 export default connect(
 
-  ({ movies: { hearted } },{ movie: { id } }) =>
-    ({
-      isHearted: hearted.includes(id)
-    }),
+  // ({ movies: { hearted } },{ movie: { id } }) =>
+  //   {
+  //
+  //    console.log( "on card.js export A " + JSON.stringify(id, null, 2));
+  //
+  //
+  //     return {
+  //       isHearted: hearted.includes(id),
+  //     }
+  //   },
+  (state, { movie: { id } } ) => {
+    console.log( "on card.js export A " + JSON.stringify({ movie: {id} }, null, 2));
+     return {
+      isHearted : state.movies.hearted.includes(id),
+    }
+  },
 
   (dispatch, { movie: { id } }) => ({
     onAddHeart: () => dispatch(heartMovie(id)),
     onRemoveHeart: () => dispatch(unheartMovie(id))
   })
 )(Card);
+
