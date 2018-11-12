@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Card from './Card';
 import Genres from './Genres';
 import { getMovies } from '../thunks';
-import { setMovies } from '../actions';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -17,15 +17,6 @@ class App extends React.Component {
 
   }
 
-  setMovieList = (movieList) => {
-
-    console.log("on setmovielist app.js");
-    console.log(movieList);
-
-    this.setState({
-      movieList,
-    })
-  };
 
   addHeart = (id) => {
     const { hearted } = this.state;
@@ -45,11 +36,13 @@ class App extends React.Component {
 
   render() {
     const { movieList } = this.props;
-    const { hearted } = this.state;
+    const { hearted } = this.props;
+
+    console.log("On Api.js render " + movieList);
 
     return (
       <React.Fragment>
-        <Genres onChangeList={this.setMovieList} />
+        <Genres />
 
         <div className="cards">
           {movieList.map((movie) => (
@@ -68,12 +61,18 @@ class App extends React.Component {
 }
 
 export default connect(
+  //todo: review below
   // function to get data from redux store to this components props
-  (state) => {
-    return {
-      movieList: state.movies.list,
-    };
-  },
+  // (state) => {
+  //   return {
+  //     movieList: state.movies.list,
+  //   };
+  // },
+  ({ movies: { list } }) => ({
+    movieList: list
+  }),
+
+
   // function to pass action callers to this components props
   (dispatch) => {
     return {
