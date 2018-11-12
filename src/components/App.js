@@ -8,9 +8,7 @@ import { getMovies } from '../thunks';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     props.onGetMovies();
-
   }
 
 
@@ -18,9 +16,10 @@ class App extends React.Component {
     const { movieList } = this.props;
     const { hearted } = this.props;
 
-    console.log("On Api.js render1 " + this.props);
-    console.log("On Api.js render " + movieList);
-    console.log( "on App.js hearted " + hearted);
+
+    console.log("on App.js this.propsas: " + this.props.movieList);
+    //console.log("on App.js hearted: " + movies.hearted);
+
     return (
 
       <React.Fragment>
@@ -43,15 +42,13 @@ class App extends React.Component {
 
 export default connect(
   //todo: review below
-  // function to get data from redux store to this components props
-  // (state) => {
-  //   return {
-  //     movieList: state.movies.list,
-  //   };
-  // },
-  ({ movies: { list } }) => ({
-    movieList: list
-  }),
+  //function to get data from redux store to this components props
+  (state) => {
+    return {
+      movieList: state.movies.list,
+      hearted: state.movies.hearted,
+    };
+  },
 
 
   // function to pass action callers to this components props

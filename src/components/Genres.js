@@ -37,7 +37,7 @@ class Genres extends React.Component {
   render() {
     const { genres, onGetMoviesByGenre } = this.props;
 
-    console.log('on render genres.js' + genres);
+    console.log('on render genres.js' + this.props.genres);
 
     return (
       <div className="genres">
