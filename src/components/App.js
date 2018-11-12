@@ -19,7 +19,7 @@ class App extends React.Component {
 
   setMovieList = (movieList) => {
 
-    console.log("on setmovie list app.js");
+    console.log("on setmovielist app.js");
     console.log(movieList);
 
     this.setState({

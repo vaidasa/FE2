@@ -24,10 +24,14 @@ export default class Genres extends React.Component {
   requestGenresMovies = (id) => {
     const { onChangeList } = this.props;
 
+    console.log(id);
+
     axios
       .get(endpoints.genreMovies(id))
       .then((res) => onChangeList(res.data.results))
       .catch((error) => console.log(error));
+
+
   };
 
   setGenreList = (genres) => {
