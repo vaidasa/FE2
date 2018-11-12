@@ -9,6 +9,7 @@ const moviesReducer = (state = initialState, action) => {
   // reducer - always return NEW state, no functionality can be done here
   switch (action.type) {
     case 'SET_MOVIES':
+      console.log(action.movies);
       return { ...state, list: action.movies };
 
     default:

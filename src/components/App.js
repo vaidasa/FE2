@@ -14,9 +14,14 @@ class App extends React.Component {
     };
 
     props.onGetMovies();
+
   }
 
   setMovieList = (movieList) => {
+
+    console.log("on setmovie list app.js");
+    console.log(movieList);
+
     this.setState({
       movieList,
     })
