@@ -3,15 +3,8 @@ import axios from "axios";
 import {endpoints} from "../../config";
 
 export default class Genre extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      genreMovieList: [],
-    };
-
-    this.requestGenreMovies();
-
+  constructor() {
+    super();
   }
 
   updateGenreMovies = () => {
