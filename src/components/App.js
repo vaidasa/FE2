@@ -37,7 +37,6 @@ class App extends React.Component {
 }
 
 export default connect(
-  //todo: review below
   //function to get data from redux store to this components props
   (state) => {
     return {

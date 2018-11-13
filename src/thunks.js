@@ -14,7 +14,6 @@ export const getMovies = () => (dispatch) => {
 };
 
 export const getGenres = () => dispatch => {
-  console.log("on getGenres thunks.js");
   axios
     .get(endpoints.genres())
     .then(({ data: { genres } }) => dispatch(setGenres(genres)))

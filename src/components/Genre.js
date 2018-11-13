@@ -29,12 +29,8 @@ export default class Genre extends React.Component {
 
   updateGenreMovies = () => {
 
-    // this.requestGenreMovies();
-
-    this.props.onReceivedNewList(this.state.genreMovieList);
+  this.props.onReceivedNewList(this.state.genreMovieList);
   };
-
-
 
   render() {
     const {

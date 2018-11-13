@@ -20,19 +20,12 @@ class Card extends React.Component {
     });
   };
 
-  toggleHearth = () => {
-
-    this.props.likedList.includes(this.props.movie.id)
-       ? this.props.onUnliked(this.props.movie.id)
-       : this.props.onLiked(this.props.movie.id);
-
-    this.setState({});
-
-  };
-
   render() {
 
     const {
+      isHearted,
+      onAddHeart,
+      onRemoveHeart,
       movie: {
         backdrop_path,
         original_title,
@@ -42,10 +35,8 @@ class Card extends React.Component {
         vote_count,
         id,
       },
-      likedList,
     } = this.props;
     const { opened } = this.state;
-
 
     return (
       <div className="card">
@@ -59,11 +50,10 @@ class Card extends React.Component {
         </div>
 
         <div className="card__like">
-          {likedList.includes(id)
-            ? <i className="fa fa-heart" onClick={this.toggleHearth} />
-            : <i className="fa fa-heart-o" onClick={this.toggleHearth} />
+          {isHearted
+            ? <i className="fa fa-heart" onClick={onRemoveHeart } />
+            : <i className="fa fa-heart-o" onClick={onAddHeart} />
           }
-
         </div>
 
         <div className="card__subtitle">
@@ -90,18 +80,7 @@ class Card extends React.Component {
 
 export default connect(
 
-  // ({ movies: { hearted } },{ movie: { id } }) =>
-  //   {
-  //
-  //    console.log( "on card.js export A " + JSON.stringify(id, null, 2));
-  //
-  //
-  //     return {
-  //       isHearted: hearted.includes(id),
-  //     }
-  //   },
   (state, { movie: { id } } ) => {
-    console.log( "on card.js export A " + JSON.stringify({ movie: {id} }, null, 2));
      return {
       isHearted : state.movies.hearted.includes(id),
     }

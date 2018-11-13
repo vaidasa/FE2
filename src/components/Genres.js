@@ -11,28 +11,6 @@ class Genres extends React.Component {
     props.onGetGenres();
   }
 
-  // requestGenres = () => {
-  //   axios
-  //     .get(endpoints.genres())
-  //     .then((res) => this.setGenreList(res.data.genres))
-  //     .catch((error) => console.log(error));
-  // };
-  //
-  // requestGenresMovies = (id) => dispatch => {
-  //   const { onChangeList } = this.props;
-  //   axios
-  //     .get(endpoints.genreMovies(id))
-  //     .then((res) => dispatch(setMovies(res)))
-  //     .catch((error) => console.log(error));
-  //
-  //
-  // };
-
-  // setGenreList = (genres) => {
-  //   this.setState({
-  //     genres,
-  //   })
-  // };
 
   render() {
     const { genres, onGetMoviesByGenre } = this.props;
