@@ -1,52 +1,63 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
-import Card from './Card';
 import { endpoints } from '../../config';
+import { getMoviesByGenre, getGenres } from "../thunks";
 
-export default class Genres extends React.Component {
-  constructor() {
-    super();
+class Genres extends React.Component {
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      genres: [],
-    };
-
-    this.requestGenres();
+    props.onGetGenres();
   }
 
-  requestGenres = () => {
-    axios
-      .get(endpoints.genres())
-      .then((res) => this.setGenreList(res.data.genres))
-      .catch((error) => console.log(error));
-  };
+  // requestGenres = () => {
+  //   axios
+  //     .get(endpoints.genres())
+  //     .then((res) => this.setGenreList(res.data.genres))
+  //     .catch((error) => console.log(error));
+  // };
+  //
+  // requestGenresMovies = (id) => dispatch => {
+  //   const { onChangeList } = this.props;
+  //   axios
+  //     .get(endpoints.genreMovies(id))
+  //     .then((res) => dispatch(setMovies(res)))
+  //     .catch((error) => console.log(error));
+  //
+  //
+  // };
 
-  requestGenresMovies = (id) => {
-    const { onChangeList } = this.props;
-
-    axios
-      .get(endpoints.genreMovies(id))
-      .then((res) => onChangeList(res.data.results))
-      .catch((error) => console.log(error));
-  };
-
-  setGenreList = (genres) => {
-    this.setState({
-      genres,
-    })
-  };
+  // setGenreList = (genres) => {
+  //   this.setState({
+  //     genres,
+  //   })
+  // };
 
   render() {
-    const { genres } = this.state;
+    const { genres, onGetMoviesByGenre } = this.props;
 
     return (
       <div className="genres">
-        {genres.map((genre) => (
-          <div key={genre.id} className="genre" onClick={() => this.requestGenresMovies(genre.id)}>
-            {genre.name}
+        {genres.map(({ id, name }) => (
+          <div key={id} className="genre" onClick={() => onGetMoviesByGenre(id)}>
+            {name}
           </div>
         ))}
       </div>
     );
   }
 }
+
+
+export default connect(
+  (state) => {
+    return {
+      genres: state.genres,
+    }
+  },
+  dispatch => ({
+    onGetGenres: () => dispatch(getGenres()),
+    onGetMoviesByGenre: (id, name) => dispatch(getMoviesByGenre(id, name))
+  })
+)(Genres);

@@ -1,7 +1,9 @@
 import React from 'react';
 import { getImageUrl } from '../../config';
+import { connect } from 'react-redux';
+import { heartMovie, unheartMovie } from "../thunks";
 
-export default class Card extends React.Component {
+class Card extends React.Component {
   constructor() {
     super();
 
@@ -84,3 +86,30 @@ export default class Card extends React.Component {
     );
   }
 }
+
+
+export default connect(
+
+  // ({ movies: { hearted } },{ movie: { id } }) =>
+  //   {
+  //
+  //    console.log( "on card.js export A " + JSON.stringify(id, null, 2));
+  //
+  //
+  //     return {
+  //       isHearted: hearted.includes(id),
+  //     }
+  //   },
+  (state, { movie: { id } } ) => {
+    console.log( "on card.js export A " + JSON.stringify({ movie: {id} }, null, 2));
+     return {
+      isHearted : state.movies.hearted.includes(id),
+    }
+  },
+
+  (dispatch, { movie: { id } }) => ({
+    onAddHeart: () => dispatch(heartMovie(id)),
+    onRemoveHeart: () => dispatch(unheartMovie(id))
+  })
+)(Card);
+
